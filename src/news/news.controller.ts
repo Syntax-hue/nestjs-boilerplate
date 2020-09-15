@@ -5,7 +5,7 @@ import { NewsService } from './news.service';
 export class NewsController {
 
     constructor(private readonly newsService: NewsService) { }
-    
+
     @Get()
     async getAll() {
         return this.newsService.getAll();
@@ -21,19 +21,19 @@ export class NewsController {
     @Post()
     async createPost(
         @Body() createNewsDto: any
-) {
+    ) {
         return this.newsService.create(createNewsDto);
     }
 
     @Patch(':id')
     async update(
         @Param('id') id: string,
-        @Body() body: any,
+        @Body() updateNewsDto: any,
     ) {
-        return this.newsService.update(id, body);
+        return this.newsService.update(id, updateNewsDto);
     }
 
-    @Delete(':id') 
+    @Delete(':id')
     async remove(
         @Param('id') id: string,
     ) {

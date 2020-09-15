@@ -1,17 +1,33 @@
-import { Injectable } from '@nestjs/common';
+import { Model } from 'mongoose';
+import { News } from './schema/news.shema';
+import { InjectModel } from '@nestjs/mongoose';
+import { Injectable, ForbiddenException, HttpException, HttpStatus } from '@nestjs/common';
 
 @Injectable()
 export class NewsService {
 
-  getAll() {
-    return 'getting all news'
+  constructor(@InjectModel(News.name) private readonly newsModel: Model<News> ) { }
+
+  public async getAll() {
+    try {
+      return this.newsModel.find();
+    } catch (e) {
+      throw new HttpException(e.message, e.status || HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   public async getOne(id) {
-    return 'get one'
+    try {
+      const news = await this.newsModel.findOne({ _id: id});
+      
+      if (!news) return new ForbiddenException();
+      return news;
+    } catch (e) {
+      throw new HttpException(e.message, e.status || HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
-  async create(dto) {
+  public async create(dto) {
     return 'create'
   }
 
@@ -19,7 +35,7 @@ export class NewsService {
     return 'update';
   }
 
-  async remove(id) {
+  public async remove(id) {
     return 'remove';
   }
 }
