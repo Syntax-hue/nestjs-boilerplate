@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { RolesBuilderService } from './roles-builder/roles-builder.service';
 import { NotificationsModule } from './notifications/notifications.module';
+import { NewsModule } from './news/news.module';
 
 
 @Module({
@@ -29,6 +30,7 @@ import { NotificationsModule } from './notifications/notifications.module';
     RolesBuilderModule,
     NotificationsModule,
     AuthModule,
+    NewsModule,
   ],
   controllers: [],
   providers: [],
