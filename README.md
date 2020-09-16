@@ -9,9 +9,15 @@ A real-world CRM system with Role-based authorization.
 Build in TypeScript and MongoDB.
 
 
+## Docs
+
+I'll implement [swagger](https://swagger.io/) ASAP.
+
+
+
 ## Roles
 The roles are stored in the database in the following format 
-// grant list fetched from DB (to be converted to a valid grants object, internally)
+
 ```
 let grantList = [
     { role: 'admin', resource: 'video', action: 'create:any', attributes: '*, !views' },
@@ -26,9 +32,6 @@ let grantList = [
 ];
 ```
 See https://github.com/nestjsx/nest-access-control for more.
-
-
-I'll implement swagger ASAP.
 
 ## Installation
 
