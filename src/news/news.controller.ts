@@ -1,8 +1,11 @@
+import { User } from './../users/schema/user.schema';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { CreateNewsDto } from './dto/create-news.dto';
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { NewsService } from './news.service';
 import { News } from './schema/news.shema';
+import { UserData } from 'src/core/decorators';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('news')
 export class NewsController {
@@ -22,24 +25,30 @@ export class NewsController {
         return this.newsService.get({ _id: id });
     }
 
+    @UseGuards(AuthGuard)
     @Post()
     async createPost(
-        @Body() createNewsDto: CreateNewsDto
+        @Body() createNewsDto: CreateNewsDto,
+        @UserData() user: User
     ): Promise<News> {
         return this.newsService.create(createNewsDto);
     }
 
+    @UseGuards(AuthGuard)
     @Patch(':id')
     async update(
         @Param('id') id: string,
         @Body() updateNewsDto: UpdateNewsDto,
+        @UserData() user: User
     ): Promise<Partial<News>> {
         return this.newsService.update(id, updateNewsDto, { new: true });
     }
 
+    @UseGuards(AuthGuard)
     @Delete(':id')
     async remove(
         @Param('id') id: string,
+        @UserData() user: User
     ): Promise<void> {
         return this.newsService.deleteOne({ _id: id });
     }
