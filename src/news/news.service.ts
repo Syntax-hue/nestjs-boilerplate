@@ -6,7 +6,9 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class NewsService extends CrudService<News> {
-  constructor(@InjectModel(News.name) private readonly newsModel: Model<News>) {
+  constructor(
+    @InjectModel(News.name) private readonly newsModel: Model<News>
+  ) {
     super(newsModel)
   }
 }
