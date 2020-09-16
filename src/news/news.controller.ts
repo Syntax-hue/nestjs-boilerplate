@@ -6,10 +6,13 @@ import { NewsService } from './news.service';
 import { News } from './schema/news.shema';
 import { UserData } from 'src/core/decorators';
 import { AuthGuard } from '@nestjs/passport';
+import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control';
 
 @Controller('news')
 export class NewsController {
-    constructor(private readonly newsService: NewsService) { }
+    constructor(private readonly newsService: NewsService,
+        @InjectRolesBuilder() private readonly rolesBuilder: RolesBuilder 
+        ) { }
 
     public resource = 'news';
 
@@ -31,7 +34,11 @@ export class NewsController {
         @Body() createNewsDto: CreateNewsDto,
         @UserData() user: User
     ): Promise<News> {
-        return this.newsService.create(createNewsDto);
+        return this.newsService.create(createNewsDto, {
+            permission: this.rolesBuilder.can(user.roles),
+            resource: this.resource,
+            userId: user.id
+        });
     }
 
     @UseGuards(AuthGuard)
@@ -41,7 +48,12 @@ export class NewsController {
         @Body() updateNewsDto: UpdateNewsDto,
         @UserData() user: User
     ): Promise<Partial<News>> {
-        return this.newsService.update(id, updateNewsDto, { new: true });
+        return this.newsService.update(id, updateNewsDto, { new: true }, {
+            permission: this.rolesBuilder.can(user.roles),
+            resource: this.resource,
+            userId: user.id,
+            ownershipField: '_id'
+        });
     }
 
     @UseGuards(AuthGuard)
@@ -50,6 +62,11 @@ export class NewsController {
         @Param('id') id: string,
         @UserData() user: User
     ): Promise<void> {
-        return this.newsService.deleteOne({ _id: id });
+        return this.newsService.deleteOne({ _id: id }, {
+            permission: this.rolesBuilder.can(user.roles),
+            resource: this.resource,
+            userId: user.id,
+            ownershipField: '_id'
+        });
     }
 }
