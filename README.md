@@ -12,6 +12,7 @@ Build in TypeScript and MongoDB.
 ## Roles
 The roles are stored in the database in the following format 
 // grant list fetched from DB (to be converted to a valid grants object, internally)
+```
 let grantList = [
     { role: 'admin', resource: 'video', action: 'create:any', attributes: '*, !views' },
     { role: 'admin', resource: 'video', action: 'read:any', attributes: '*' },
@@ -23,7 +24,7 @@ let grantList = [
     { role: 'user', resource: 'video', action: 'update:own', attributes: '*, !rating, !views' },
     { role: 'user', resource: 'video', action: 'delete:own', attributes: '*' }
 ];
-
+```
 See https://github.com/nestjsx/nest-access-control for more.
 
 
