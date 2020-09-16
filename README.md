@@ -5,8 +5,10 @@
 
 ## Description
 
-A real-world CRM system.
+A real-world CRM system with Role-based authorization.
 Build in TypeScript and MongoDB.
+
+I've used MongoDB and Mongoose because there's I needed a flexible database.
 
 ## Installation
 
