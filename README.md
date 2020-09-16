@@ -10,6 +10,8 @@ Build in TypeScript and MongoDB.
 
 I've used MongoDB and Mongoose because there's I needed a flexible database.
 
+I'll implement swagger ASAP.
+
 ## Installation
 
 ```bash
