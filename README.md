@@ -17,7 +17,10 @@ I'll implement [swagger](https://swagger.io/) ASAP.
 
 
 ## Roles
-The roles are stored in the database in the following format 
+
+You can see all of the existing roles and add new roles in the runtime.
+
+The roles are stored in the database in the following format:
 
 ```
 let grantList = [
