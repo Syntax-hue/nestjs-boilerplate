@@ -3,7 +3,6 @@
 </p>
 
 
-
 ## Description
 
 A real-world CRM system.
