@@ -13,6 +13,6 @@ import { NewsService } from './news.service';
     PassportModule.register({ defaultStrategy: 'jwt '}),
   ],
   controllers: [NewsController],
-  providers: [NewsService]
+  providers: [NewsService],
 })
 export class NewsModule {}
