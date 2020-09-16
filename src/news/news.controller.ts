@@ -1,10 +1,13 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { UseRoles } from 'nest-access-control';
 import { NewsService } from './news.service';
 
 @Controller('news')
 export class NewsController {
 
     constructor(private readonly newsService: NewsService) { }
+
+    public resource = 'news';
 
     @Get()
     async getAll() {
@@ -15,7 +18,7 @@ export class NewsController {
     async getOne(
         @Param('id') id: string
     ) {
-        return this.newsService.getOne(id);
+        return this.newsService.get(id);
     }
 
     @Post()
@@ -30,13 +33,13 @@ export class NewsController {
         @Param('id') id: string,
         @Body() updateNewsDto: any,
     ) {
-        return this.newsService.update(id, updateNewsDto);
+        return this.newsService.update(id, updateNewsDto, { new: true });
     }
 
     @Delete(':id')
     async remove(
         @Param('id') id: string,
     ) {
-        return this.newsService.remove(id);
+        return this.newsService.deleteOne(id);
     }
 }
