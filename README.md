@@ -39,17 +39,20 @@ See https://github.com/nestjsx/nest-access-control for more.
 
 ## Installation
 
-I've used MongoDB and Mongoose because there's I needed a flexible database. If you have docker installed you can run
+I've used MongoDB and Mongoose because of the flexibility. If you have docker installed you can run
 
 ```bash
 # to start mongodb
 $ docker-compose up -d
 ```
 
+And 
 
 ```bash
 $ npm install
 ```
+for dependencies.
+
 
 ## Running the app
 
