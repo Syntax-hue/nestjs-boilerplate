@@ -6,7 +6,6 @@ import { News } from './schema/news.shema';
 
 @Controller('news')
 export class NewsController {
-
     constructor(private readonly newsService: NewsService) { }
 
     public resource = 'news';
@@ -20,7 +19,7 @@ export class NewsController {
     async getOne(
         @Param('id') id: string
     ): Promise<News> {
-        return this.newsService.get({_id: id});
+        return this.newsService.get({ _id: id });
     }
 
     @Post()
@@ -42,6 +41,6 @@ export class NewsController {
     async remove(
         @Param('id') id: string,
     ): Promise<void> {
-        return this.newsService.deleteOne({_id: id});
+        return this.newsService.deleteOne({ _id: id });
     }
 }
