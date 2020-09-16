@@ -35,11 +35,15 @@ let grantList = [
     { role: 'user', resource: 'video', action: 'delete:own', attributes: '*' }
 ];
 ```
+
+The ADMIN role is inserted automatic with every start of the application.
+To see how it works enter the app.roles.ts in the src directory. There you can add roles to admin.
+
 See https://github.com/nestjsx/nest-access-control for more.
 
 ## Installation
 
-I've used MongoDB and Mongoose because of the flexibility. If you have docker installed you can run
+I'm using MongoDB and Mongoose because of the flexibility. If you have docker installed you can run
 
 ```bash
 # to start mongodb
