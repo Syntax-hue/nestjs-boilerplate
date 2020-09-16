@@ -1,6 +1,8 @@
+import { UpdateNewsDto } from './dto/update-news.dto';
+import { CreateNewsDto } from './dto/create-news.dto';
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { UseRoles } from 'nest-access-control';
 import { NewsService } from './news.service';
+import { News } from './schema/news.shema';
 
 @Controller('news')
 export class NewsController {
@@ -10,36 +12,36 @@ export class NewsController {
     public resource = 'news';
 
     @Get()
-    async getAll() {
+    async getAll(): Promise<News[]> {
         return this.newsService.getAll();
     }
 
     @Get(':id')
     async getOne(
         @Param('id') id: string
-    ) {
-        return this.newsService.get(id);
+    ): Promise<News> {
+        return this.newsService.get({_id: id});
     }
 
     @Post()
     async createPost(
-        @Body() createNewsDto: any
-    ) {
+        @Body() createNewsDto: CreateNewsDto
+    ): Promise<News> {
         return this.newsService.create(createNewsDto);
     }
 
     @Patch(':id')
     async update(
         @Param('id') id: string,
-        @Body() updateNewsDto: any,
-    ) {
+        @Body() updateNewsDto: UpdateNewsDto,
+    ): Promise<Partial<News>> {
         return this.newsService.update(id, updateNewsDto, { new: true });
     }
 
     @Delete(':id')
     async remove(
         @Param('id') id: string,
-    ) {
-        return this.newsService.deleteOne(id);
+    ): Promise<void> {
+        return this.newsService.deleteOne({_id: id});
     }
 }
