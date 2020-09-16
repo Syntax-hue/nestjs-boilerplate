@@ -6,6 +6,7 @@
 ## Description
 
 A real-world CRM system.
+Build in TypeScript and MongoDB.
 
 ## Installation
 
