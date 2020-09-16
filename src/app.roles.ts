@@ -15,8 +15,8 @@ export const APP_RESOURCES = [
     value: 'notifications'
   },
   {
-    name: 'Dictionary',
-    value: 'dictionary'
+    name: 'News',
+    value: 'news'
   }
 ]
 
