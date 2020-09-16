@@ -1,11 +1,11 @@
-import { IsArray, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
+import { IsArray, IsOptional, IsString, MaxLength, MinLength, IsNotEmpty } from "class-validator";
 
 export class CreateNewsDto {
     
     @IsString()
-    @IsOptional()
     @MaxLength(100)
     @MinLength(5)
+    @IsNotEmpty()
     public readonly title;
 
     @IsString()
@@ -20,10 +20,10 @@ export class CreateNewsDto {
     public readonly tags;
 
     @IsString()
-    @IsOptional()
+    @IsNotEmpty()
     public readonly frontImage;
-    
+
+    @IsNotEmpty()
     @IsString()
-    @IsOptional()
-    public readonly updateAt;
+    public readonly html;
 }

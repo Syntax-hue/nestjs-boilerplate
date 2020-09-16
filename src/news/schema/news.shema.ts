@@ -31,6 +31,10 @@ export class News extends Document {
     frontImage: string;
 
     @ApiResponseModelProperty() /* Swagger * */
+    @Prop()
+    html: string;
+
+    @ApiResponseModelProperty() /* Swagger * */
     @Prop({
         default: new Date()
     })
