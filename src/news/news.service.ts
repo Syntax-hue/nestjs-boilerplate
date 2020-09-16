@@ -9,5 +9,4 @@ export class NewsService extends CrudService<News> {
   constructor(@InjectModel(News.name) private readonly newsModel: Model<News>) {
     super(newsModel)
   }
-
 }
