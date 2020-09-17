@@ -16,9 +16,7 @@ export class User extends Document {
   })
   roles: [AppRoles]
 
-  @Prop({
-    default: 'https://enwardo-assets.ams3.digitaloceanspaces.com/enwardo-api/user.png'
-  })
+  @Prop()
   userAvatar: string;
 
   @Prop({
@@ -26,7 +24,7 @@ export class User extends Document {
       unique: true
     }
   })
-  email: string; // should throw an err but doesn't
+  email: string;
 
   @Prop()
   password: string;
