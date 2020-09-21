@@ -65,32 +65,17 @@ export class AuthService {
 
   public async loginUser(loginUserDto: LoginUserDto): Promise<LoginUserResponseDto> {
     try {
-      console.log(2);
-
       const user = await this.validateCustomer(loginUserDto.email, loginUserDto.password);
-      console.log(1);
-
-
-      console.log(user);
       if (user) {
-        console.log(111);
-
         const payload: IJwtPayload = { _id: user.id, firstName: user.firstName, roles: user.roles }
 
         return {
           jwt: this.jwtService.sign(payload)
         }
       }
-
-      console.log('yes');
-
     } catch (e) {
-      console.log('yes');
-
       throw new HttpException(e.message || 'SOMETHING_BAD_HAPPEN', e.status || HttpStatus.INTERNAL_SERVER_ERROR)
     }
-    console.log('yes');
-
     throw new UnauthorizedException('INVALID_CREDENTIALS');
   }
 
