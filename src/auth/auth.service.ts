@@ -21,6 +21,7 @@ import { getPassedMinutes } from '../core/utils';
 import { ResetPassword } from './schemas/reset-password.schema';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { NotificationsService } from 'src/notifications/notifications.service';
+import { AppRoles } from 'src/app.roles';
 
 const SALT_ROUNDS = 10;
 const EMAIL_SENT_LIMIT_MINUTES = 30;
@@ -37,6 +38,21 @@ export class AuthService {
     @InjectModel('reset-password') private resetPasswordModel: Model<ResetPassword>
   ) { }
 
+  public async createAdmin(): Promise<void> {
+    const adminUser = await this.usersService.get({ email: process.env.ADMIN_EMAIL });
+    if (adminUser) throw new ForbiddenException();
+
+    await this.usersService.create({
+      firstName: 'ADMIN',
+      lastName: 'ADMIN',
+      roles: [AppRoles.ADMIN],
+      email: process.env.ADMIN_EMAIL,
+      password: await bcrypt.hash('123456', SALT_ROUNDS),
+      isActive: true,
+      isEmailConfirmed: true,
+    })
+  }
+
   public async registerUser(registerUserDto: RegisterUserDto): Promise<void> {
     if (await this.usersService.getByEmail(registerUserDto.email)) {
       throw new BadRequestException('EMAIL_ALREADY_EXISTS');
@@ -49,16 +65,32 @@ export class AuthService {
 
   public async loginUser(loginUserDto: LoginUserDto): Promise<LoginUserResponseDto> {
     try {
+      console.log(2);
+
       const user = await this.validateCustomer(loginUserDto.email, loginUserDto.password);
+      console.log(1);
+
+
+      console.log(user);
       if (user) {
+        console.log(111);
+
         const payload: IJwtPayload = { _id: user.id, firstName: user.firstName, roles: user.roles }
+
         return {
           jwt: this.jwtService.sign(payload)
         }
       }
+
+      console.log('yes');
+
     } catch (e) {
+      console.log('yes');
+
       throw new HttpException(e.message || 'SOMETHING_BAD_HAPPEN', e.status || HttpStatus.INTERNAL_SERVER_ERROR)
     }
+    console.log('yes');
+
     throw new UnauthorizedException('INVALID_CREDENTIALS');
   }
 

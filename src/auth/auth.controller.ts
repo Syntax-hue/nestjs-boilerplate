@@ -1,3 +1,4 @@
+import { User } from './../users/schema/user.schema';
 import {
   BadRequestException,
   Body,
@@ -30,6 +31,14 @@ export class AuthController {
   constructor(
     private authService: AuthService
   ) { }
+
+  // swagger //
+  @ApiOperation({ summary: 'Register a new user with ADMIN Role. Can do only once' })
+  // ----- //
+  @Get('create-admin-user')
+  public async createAdminUser(): Promise<void> {
+    return this.authService.createAdmin();
+  }
 
   // swagger //
   @ApiOperation({ summary: 'Register a new user and sends the confirmation email' })
