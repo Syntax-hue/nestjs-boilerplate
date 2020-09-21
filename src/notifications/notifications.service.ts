@@ -22,13 +22,16 @@ export class NotificationsService extends CrudService<Notifications> {
     secure: true,
     auth: {
       type: 'OAuth2',
-      user: 'info@enwardo.com',
+      user: 'info.company.com',
       serviceClient: process.env.G_CLIENT_ID,
       privateKey: process.env.G_PRIVATE_KEY.replace(/\\n/g, '\n')
     }
   });
 
-  public async sendEmailToRegisteredNotifiers(details: ISendEmailDetails, area: NotificationsArea) {
+  public async sendEmailToRegisteredNotifiers(
+    details: ISendEmailDetails, 
+    area: NotificationsArea
+    ): Promise<void> {
     const notifiers = await this.getAll();
     notifiers.forEach(notifier => {
       if (notifier.area.includes(area)) {
@@ -40,7 +43,7 @@ export class NotificationsService extends CrudService<Notifications> {
     });
   }
 
-  public async sendEmail(details: ISendEmailDetails) {
+  public async sendEmail(details: ISendEmailDetails): Promise<boolean> {
     try {
       const info = await this.transporter.sendMail({
         from: details.from,

@@ -18,7 +18,7 @@ export interface IRoleDetails {
 }
 
 @Injectable()
-export class CrudService<T extends Document> {
+export abstract class CrudService<T extends Document> {
 
   constructor(
     private readonly model: Model<T>

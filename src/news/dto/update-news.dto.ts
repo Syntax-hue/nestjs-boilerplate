@@ -15,7 +15,6 @@ export class UpdateNewsDto {
 
     @IsOptional()
     @IsString()
-    @IsArray()
     public readonly tags;
 
     @IsOptional()

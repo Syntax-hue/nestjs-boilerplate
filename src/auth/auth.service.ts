@@ -119,7 +119,7 @@ export class AuthService {
   public async sendResetPasswordEmail(email: string): Promise<boolean> {
     const resetPassword = await this.resetPasswordModel.findOne({ email });
     return await this.notificationService.sendEmail({
-      from: 'Enwardo',
+      from: 'Company',
       name: '',
       to: email,
       subject: 'Forgot Password Code',
@@ -134,10 +134,10 @@ export class AuthService {
   public async sendRegistrationEmailConfirmation(email: string, name: string = null): Promise<boolean> {
     const emailConfirmation = await this.emailConfirmationModel.findOne({ email });
     return await this.notificationService.sendEmail({
-      from: 'Enwardo',
+      from: 'Company',
       name,
       to: email,
-      subject: 'Enwardo Registration Confirmation Code',
+      subject: 'Company Registration Confirmation Code',
       html: `
         <h3> Hello dear ${name || 'customer'}</h3>
         <p>

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ResponseSuccess } from '../core/utils';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '../guards/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { NotificationsService } from './notifications.service';
 import { CreateNotificationsDto, UpdateNotificationsDto } from './dto/create.notifications.dto';
 import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control';
@@ -18,8 +18,7 @@ export class NotificationsController {
   constructor(
     private notificationsService: NotificationsService,
     @InjectRolesBuilder() private readonly rolesBuilder: RolesBuilder
-  ) {
-  }
+  ) { }
 
   public readonly resource = 'notifications';
 
