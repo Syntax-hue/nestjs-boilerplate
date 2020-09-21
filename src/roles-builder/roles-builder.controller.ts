@@ -3,7 +3,7 @@ import { RolesBuilderService } from './roles-builder.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { Roles } from './schema/roles.schema';
-import { AuthGuard } from '../guards/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { ACGuard, UseRoles } from 'nest-access-control';
 import { APP_RESOURCES } from '../app.roles';
 
@@ -24,6 +24,11 @@ export class RolesBuilderController {
     return this.rolesBuilder.getAll();
   }
 
+  @UseGuards(AuthGuard, ACGuard)
+  @UseRoles({
+    resource: 'roles',
+    action: 'read',
+  })
   @Get('resources')
   getResources() {
     return APP_RESOURCES;
