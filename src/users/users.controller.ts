@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, UseGuards, Req, BadRequestException, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards, Req, Delete } from '@nestjs/common';
 import { User } from './schema/user.schema';
 import { UsersService } from './users.service';
 import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control';
