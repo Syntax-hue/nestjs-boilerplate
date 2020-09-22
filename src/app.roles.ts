@@ -61,4 +61,4 @@ export enum AppRoles {
   ADMIN = 'ADMIN',
   MODERATOR = 'MODERATOR',
   USER = 'USER',
-} // should receive from db
+}
