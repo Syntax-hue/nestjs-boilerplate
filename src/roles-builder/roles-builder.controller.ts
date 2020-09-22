@@ -4,7 +4,7 @@ import { RolesBuilderService } from './roles-builder.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { Roles } from './schema/roles.schema';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard } from '../auth/guards/auth.guard';
 import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control';
 import { APP_RESOURCES } from '../app.roles';
 import { UserData } from 'src/core/decorators';
