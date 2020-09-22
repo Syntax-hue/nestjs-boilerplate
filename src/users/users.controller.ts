@@ -4,7 +4,7 @@ import { UsersService } from './users.service';
 import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control';
 
 import { CreateUserDto } from './dto/create-user.dto';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard } from '../auth/guards/auth.guard';
 
 @Controller('users')
 export class UsersController {
