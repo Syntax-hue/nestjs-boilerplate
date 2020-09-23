@@ -1,3 +1,4 @@
+import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { Body, Controller, Get, Param, Patch, Post, UseGuards, Req, Delete } from '@nestjs/common';
 import { User } from './schema/user.schema';
 import { UsersService } from './users.service';
@@ -6,6 +7,7 @@ import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthGuard } from '../auth/guards/auth.guard';
 
+@ApiTags('Users') /* Swagger * */
 @Controller('users')
 export class UsersController {
 
@@ -16,6 +18,9 @@ export class UsersController {
 
   public readonly resource = 'users';
 
+  // swagger //
+  @ApiOperation({ summary: 'Get all Users. By default can be done only by ADMIN' })
+  // ----- //
   @UseGuards(AuthGuard)
   @Get()
   findAll(
@@ -28,6 +33,10 @@ export class UsersController {
     });
   }
 
+  // swagger //
+  @ApiParam({ name: 'id', type: String })
+  @ApiOperation({ summary: 'Get a User by id' })
+  // ----- //
   @UseGuards(AuthGuard)
   @Get(':id')
   findOne(
@@ -41,6 +50,9 @@ export class UsersController {
     })
   }
 
+  // swagger //
+  @ApiOperation({ summary: 'Create a new User' })
+  // ----- //
   @UseGuards(AuthGuard)
   @Post()
   async create(
@@ -53,6 +65,10 @@ export class UsersController {
     });
   }
 
+  // swagger //
+  @ApiParam({ name: 'id', type: String })
+  @ApiOperation({ summary: 'Change a User by id' })
+  // ----- //
   @UseGuards(AuthGuard)
   @Patch(':id')
   update(
@@ -67,6 +83,10 @@ export class UsersController {
     });
   }
 
+  // swagger //
+  @ApiParam({ name: 'id', type: String })
+  @ApiOperation({ summary: 'Delete a User by id' })
+  // ----- //
   @UseGuards(AuthGuard)
   @Delete(':id')
   remove(

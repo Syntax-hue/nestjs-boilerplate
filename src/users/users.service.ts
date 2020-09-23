@@ -15,8 +15,6 @@ export class UsersService extends CrudService<User>{
   public async getByEmail(email: string): Promise<User> {
     try {
       const user = await this.userModel.findOne({ email });
-
-      if (!user) throw new NotFoundException('EMAIL_NOT_FOUND');
       return user;
     } catch (e) {
       throw new HttpException(e.message, e.status || HttpStatus.INTERNAL_SERVER_ERROR);

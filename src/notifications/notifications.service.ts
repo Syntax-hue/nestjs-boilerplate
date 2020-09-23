@@ -17,21 +17,17 @@ export class NotificationsService extends CrudService<Notifications> {
 
 
   private transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
-      type: 'OAuth2',
-      user: 'info.company.com',
-      serviceClient: process.env.G_CLIENT_ID,
-      privateKey: process.env.G_PRIVATE_KEY.replace(/\\n/g, '\n')
+      user: process.env.GMAIL_MAILER_LOGIN,
+      pass: process.env.GMAIL_MAILER_PASSWORD
     }
   });
 
   public async sendEmailToRegisteredNotifiers(
-    details: ISendEmailDetails, 
+    details: ISendEmailDetails,
     area: NotificationsArea
-    ): Promise<void> {
+  ): Promise<void> {
     const notifiers = await this.getAll();
     notifiers.forEach(notifier => {
       if (notifier.area.includes(area)) {

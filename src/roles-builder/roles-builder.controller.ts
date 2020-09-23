@@ -1,3 +1,4 @@
+import { ApiTags } from '@nestjs/swagger';
 import { User } from './../users/schema/user.schema';
 import { Controller, Get, Param, Post, Body, Delete, Patch, BadRequestException, UseGuards } from '@nestjs/common';
 import { RolesBuilderService } from './roles-builder.service';
@@ -11,6 +12,7 @@ import { UserData } from 'src/core/decorators';
 
 
 
+@ApiTags('Roles Builder') /* Swagger * */
 @Controller('roles-builder')
 export class RolesBuilderController {
 
