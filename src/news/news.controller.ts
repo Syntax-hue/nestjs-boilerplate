@@ -1,3 +1,4 @@
+import { ApiTags } from '@nestjs/swagger';
 import { User } from './../users/schema/user.schema';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { CreateNewsDto } from './dto/create-news.dto';
@@ -5,14 +6,15 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@n
 import { NewsService } from './news.service';
 import { News } from './schema/news.shema';
 import { UserData } from 'src/core/decorators';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard } from '../auth/guards/auth.guard';
 import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control';
 
+@ApiTags('News') /* Swagger * */
 @Controller('news')
 export class NewsController {
     constructor(private readonly newsService: NewsService,
-    @InjectRolesBuilder() private readonly rolesBuilder: RolesBuilder
-        ) { }
+        @InjectRolesBuilder() private readonly rolesBuilder: RolesBuilder
+    ) { }
 
     public resource = 'news';
 

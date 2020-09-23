@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ResponseSuccess } from '../core/utils';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard } from '../auth/guards/auth.guard';
 import { NotificationsService } from './notifications.service';
 import { CreateNotificationsDto, UpdateNotificationsDto } from './dto/create.notifications.dto';
 import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control';
