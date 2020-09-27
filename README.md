@@ -5,7 +5,7 @@
 
 ## Description
 
-Production ready boilerplater with Role-based authentication and authorization.
+Production ready boilerplate with Role-based authentication and authorization.
 Build in TypeScript and MongoDB.
 
 
@@ -39,6 +39,10 @@ The ADMIN role is inserted automatic with every start of the application.
 To see how it works enter the app.roles.ts in the src directory. There you can add roles to admin.
 
 See https://github.com/nestjsx/nest-access-control for more.
+
+## Notifications
+
+You can create custom notifications and use them in a service. I also use them in auth service for sending email confirmation.
 
 ## Installation
 
