@@ -5,10 +5,9 @@
 
 ## Description
 
-A real-world CRM system with Role-based authorization.
+Production ready boilerplater with Role-based authentication and authorization.
 Build in TypeScript and MongoDB.
 
-You can use this app as a boilerplate for a production project.
 
 ## Docs
 
