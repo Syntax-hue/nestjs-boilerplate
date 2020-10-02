@@ -38,11 +38,11 @@ export class AuthService {
     @InjectModel('reset-password') private resetPasswordModel: Model<ResetPassword>
   ) { }
 
-  public async createAdmin(): Promise<void> {
-    const adminUser = await this.usersService.get({ email: process.env.ADMIN_EMAIL });
+  public async createAdmin(): Promise<User> {
+    let adminUser = await this.usersService.get({ email: process.env.ADMIN_EMAIL });
     if (adminUser) throw new ForbiddenException();
 
-    await this.usersService.create({
+    adminUser = await this.usersService.create({
       firstName: 'ADMIN',
       lastName: 'ADMIN',
       roles: [AppRoles.ADMIN],
@@ -51,6 +51,8 @@ export class AuthService {
       isActive: true,
       isEmailConfirmed: true,
     })
+
+    return adminUser;
   }
 
   public async registerUser(registerUserDto: RegisterUserDto): Promise<void> {
