@@ -10,12 +10,8 @@ async function bootstrap() {
     whitelist: true,
     forbidNonWhitelisted: true
   }))
-  app.setGlobalPrefix('api'); app.enableCors();
 
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,
-    forbidNonWhitelisted: true
-  }))
+  app.setGlobalPrefix('api'); app.enableCors();
 
   const options = new DocumentBuilder()
     .setTitle('Boilerplate')
