@@ -36,7 +36,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Register a new user with ADMIN Role. Can do only once' })
   // ----- //
   @Get('create-admin-user')
-  public async createAdminUser(): Promise<void> {
+  public async createAdminUser(): Promise<User> {
     return this.authService.createAdmin();
   }
 
