@@ -16,6 +16,12 @@ Build in TypeScript and MongoDB.
 
 I'll implement [swagger](https://swagger.io/) ASAP.
 
+swagger v0.1
+```
+npm run start:dev
+```
+
+Enter localhost:5000/api/docs
 
 
 ## Roles
