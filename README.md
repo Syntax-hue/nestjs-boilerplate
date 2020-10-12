@@ -12,6 +12,10 @@ See the necessary environment variables in example.
 
 Build in TypeScript and MongoDB.
 
+## Upcoming
+
+Upload images with multer.
+
 
 ## Docs
 
