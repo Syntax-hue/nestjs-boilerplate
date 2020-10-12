@@ -7,7 +7,8 @@
 
 Production ready boilerplate with Role-based authentication and authorization.
 Contains module for notifications (sending tokens for auth in gmail) and news (blog).
- 
+
+See the necessary environment variables in example.
 
 Build in TypeScript and MongoDB.
 
