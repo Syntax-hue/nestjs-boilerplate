@@ -10,6 +10,8 @@ import { PassportModule } from '@nestjs/passport';
 import { RolesBuilderService } from './roles-builder/roles-builder.service';
 import { NotificationsModule } from './notifications/notifications.module';
 import { NewsModule } from './news/news.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { UploadModule } from './upload/upload.module';
 
 
 @Module({
@@ -19,6 +21,9 @@ import { NewsModule } from './news/news.module';
     MongooseModule.forRoot(process.env.MONGO_URI, {
       useFindAndModify: false,
       useCreateIndex: true,
+    }),
+    MulterModule.register({
+      dest: './files',
     }),
     AccessControlModule.forRootAsync(
       {
@@ -31,6 +36,7 @@ import { NewsModule } from './news/news.module';
     NotificationsModule,
     AuthModule,
     NewsModule,
+    UploadModule,
   ],
   controllers: [],
   providers: [],

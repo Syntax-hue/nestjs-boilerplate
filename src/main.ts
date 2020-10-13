@@ -3,15 +3,24 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+import * as compression from 'compression';
+import * as helmet from 'helmet';
+
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app
+    .use(helmet())
+    .use(compression())
+    .enableCors();
 
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
     forbidNonWhitelisted: true
   }))
 
-  app.setGlobalPrefix('api'); app.enableCors();
+  app.setGlobalPrefix('api');
 
   const options = new DocumentBuilder()
     .setTitle('Boilerplate')

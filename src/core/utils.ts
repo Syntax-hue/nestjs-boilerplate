@@ -1,9 +1,10 @@
+import { extname } from 'path';
 import { ApiBody } from '@nestjs/swagger';
 
 export interface StringMap<T> {
   [x: string]: T;
 }
-export interface IResponse{
+export interface IResponse {
   success: boolean;
   message: string;
   errorMessage: string;
@@ -71,17 +72,17 @@ export function unflatten(data) {
   return resultholder[""];
 }
 
-export function flatten(o, map={}, prefix=''){ // map is a plain object
+export function flatten(o, map = {}, prefix = '') { // map is a plain object
   if (Array.isArray(o)) {
-    for (let k=0;k<o.length;k++){
-      if (typeof o[k]=='object'&&o[k]) flatten(o[k], map, prefix+'['+k+']');
-      else map[prefix+'['+k+']'] = o[k];
+    for (let k = 0; k < o.length; k++) {
+      if (typeof o[k] == 'object' && o[k]) flatten(o[k], map, prefix + '[' + k + ']');
+      else map[prefix + '[' + k + ']'] = o[k];
     }
     return map;
   }
-  for (const k in o){
-    if (typeof o[k]=='object'&&o[k]) flatten(o[k], map, (prefix?prefix+'.':'')+k);
-    else map[(prefix?prefix+'.':'')+k] = o[k];
+  for (const k in o) {
+    if (typeof o[k] == 'object' && o[k]) flatten(o[k], map, (prefix ? prefix + '.' : '') + k);
+    else map[(prefix ? prefix + '.' : '') + k] = o[k];
   }
   return map;
 }
@@ -139,3 +140,20 @@ export function arraysEqual(a, b) {
   }
   return true;
 }
+
+export const imageFileFilter = (req, file, callback) => {
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return callback(new Error('Only image files are allowed!'), false);
+  }
+  callback(null, true);
+};
+
+export const editFileName = (req, file, callback) => {
+  const name = file.originalname.split('.')[0];
+  const fileExtName = extname(file.originalname);
+  const randomName = Array(4)
+    .fill(null)
+    .map(() => Math.round(Math.random() * 16).toString(16))
+    .join('');
+  callback(null, `${name}-${randomName}${fileExtName}`);
+};
