@@ -6,7 +6,7 @@
 ## Description
 
 Production ready boilerplate with Role-based authentication and authorization.
-Contains module for notifications (sending tokens for auth in gmail) and news (blog).
+Contains module for notifications (sending tokens for auth in gmail), news (blog) and file-uploads.
 
 See the necessary environment variables in example.
 
