@@ -1,26 +1,33 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUploadDto } from './dto/create-upload.dto';
-import { UpdateUploadDto } from './dto/update-upload.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UploadService {
-  create(createUploadDto: CreateUploadDto) {
-    return 'This action adds a new upload';
+  public uploadOne(file) {
+    try {
+      const response = {
+        originalname: file.originalname,
+        filename: file.filename,
+      }
+      return response;
+    } catch (e) {
+      throw new BadRequestException(e.message || e)
+    }
   }
 
-  findAll() {
-    return `This action returns all upload`;
-  }
+  public uploadMultiple(files) {
+    try {
+      const response = [];
 
-  findOne(id: number) {
-    return `This action returns a #${id} upload`;
-  }
+      files.forEach(file => {
+        const fileResponse = {
+          originalname: file.originalname,
+          filename: file.filename,
+        };
 
-  update(id: number, updateUploadDto: UpdateUploadDto) {
-    return `This action updates a #${id} upload`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} upload`;
+        response.push(fileResponse)
+      })
+    } catch (e) {
+      throw new BadRequestException(e.message || e)
+    }
   }
 }

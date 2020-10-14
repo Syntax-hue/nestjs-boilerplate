@@ -8,6 +8,7 @@ import { diskStorage } from 'multer';
 export class UploadController {
   constructor(private readonly uploadService: UploadService) { }
 
+  @Post()
   @UseInterceptors(
     FileInterceptor('image', {
       storage: diskStorage({
@@ -19,11 +20,7 @@ export class UploadController {
   )
   async uploadFile(
     @UploadedFile() file: { originalname: string, filename: string }) {
-    const response = {
-      originalname: file.originalname,
-      filename: file.filename,
-    }
-    return response;
+    this.uploadService.uploadOne(file)
   }
 
   @Post('multiple')
@@ -39,16 +36,8 @@ export class UploadController {
   async uploadMultipleFiles(
     @UploadedFiles() files
   ) {
-    const response = [];
 
-    files.forEach(file => {
-      const fileResponse = {
-        originalname: file.originalname,
-        filename: file.filename,
-      };
-
-      response.push(fileResponse)
-    })
+    this.uploadService.uploadMultiple(files);
   }
 
   @Get(':imgpath')
