@@ -56,7 +56,7 @@ See https://github.com/nestjsx/nest-access-control for more.
 
 ## Notifications
 
-You can create custom notifications and use them in a service. I also use them in auth service for sending email confirmation.
+You can create custom notifications and use them in a service. They are used in auth service for sending email confirmation token.
 
 ## Installation
 
